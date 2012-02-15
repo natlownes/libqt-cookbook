@@ -33,7 +33,7 @@ packages[:debian] << debian_and_ubuntu
 
 packages[:ubuntu] << debian_and_ubuntu
 
-to_install = packages[node[:platform]]
+to_install = packages[node[:platform].to_sym]
 
 to_install.each do |pkg|
   package pkg do
