@@ -18,16 +18,18 @@
 #
 #
 packages = {}
+packages[:ubuntu] = []
+packages[:debian] = []
 
-packages[:ubuntu] = value_for_platform(
-  ['ubuntu'] => {'default' => 'libqtwebkit-dev'}
+packages[:ubuntu] << value_for_platform(
+  ['ubuntu'] => {['11.04', '11.10'] => 'libqtwebkit-dev'}
 )
 
 debian_and_ubuntu = value_for_platform(
   ['debian', 'ubuntu'] => {'default' => 'libqt4-dev'}
 )
 
-packages[:debian] = debian_and_ubuntu
+packages[:debian] << debian_and_ubuntu
 
 packages[:ubuntu] << debian_and_ubuntu
 
