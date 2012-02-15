@@ -17,9 +17,9 @@
 # limitations under the License.
 #
 #
-packages[:ubuntu] = []
+packages = {}
 
-packages[:ubuntu] << value_for_platform(
+packages[:ubuntu] = value_for_platform(
   ['ubuntu'] => {'default' => 'libqtwebkit-dev'}
 )
 
