@@ -26,14 +26,14 @@ packages[:ubuntu] << value_for_platform(
 )
 
 debian_and_ubuntu = value_for_platform(
-  ['debian', 'ubuntu'] => {'default' => 'libqt4-dev'}
+  ['debian', 'ubuntu'] => {'default' => ['libqt4-dev', 'qt4-qmake']}
 )
 
 packages[:debian] << debian_and_ubuntu
 
 packages[:ubuntu] << debian_and_ubuntu
 
-packages.each do |key,value|
+packages.flatten.each do |key,value|
   packages[key] = value.compact
 end
 
