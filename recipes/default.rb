@@ -17,6 +17,8 @@
 # limitations under the License.
 #
 #
+require_recipe 'apt'
+
 packages = {}
 packages[:ubuntu] = []
 packages[:debian] = []
@@ -35,6 +37,37 @@ packages[:ubuntu] << debian_and_ubuntu
 
 packages.each do |key,value|
   packages[key] = value.compact.flatten
+end
+
+if node[:lsb][:codename] == 'lucid'
+  apt_repository 'lucid-backports' do
+    #uri "http://ppa.launchpad.net/kubuntu-ppa/backports/ubuntu" 
+    uri "http://archive.ubuntu.com/ubuntu" 
+    distribution 'lucid-backports'
+    components %w(main)
+  end
+
+  packages[:ubuntu].each do |pkg_name|
+    package pkg_name do
+      options "--force-yes -t lucid-backports"
+      action  :install
+    end
+  end
+end
+
+if node[:lsb][:codename] == 'squeeze'
+  apt_repository 'squeeze-backports' do
+    uri "http://backports.debian.org/debian-backports" 
+    distribution 'squeeze-backports'
+    components %w(main)
+  end
+
+  packages[:debian].each do |pkg_name|
+    package pkg_name do
+      options "--force-yes -t squeeze-backports"
+      action  :install
+    end
+  end
 end
 
 to_install = packages[node[:platform].to_sym]
