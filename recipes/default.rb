@@ -41,9 +41,8 @@ end
 
 if node[:lsb][:codename] == 'lucid'
   apt_repository 'lucid-backports' do
-    #uri "http://ppa.launchpad.net/kubuntu-ppa/backports/ubuntu" 
-    uri "http://archive.ubuntu.com/ubuntu" 
-    distribution 'lucid-backports'
+    uri "http://ppa.launchpad.net/kubuntu-ppa/backports/ubuntu" 
+    distribution 'lucid'
     components %w(main)
   end
 
