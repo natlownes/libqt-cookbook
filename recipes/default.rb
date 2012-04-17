@@ -43,6 +43,9 @@ if node[:lsb][:codename] == 'lucid'
   apt_repository 'lucid-backports' do
     uri "http://ppa.launchpad.net/kubuntu-ppa/backports/ubuntu" 
     distribution 'lucid'
+    keyserver 'keyserver.ubuntu.com'
+    key '8AC93F7A'
+    #key 'http://keyserver.ubuntu.com:11371/pks/lookup?op=get&search=0x2836CB0A8AC93F7A'
     components %w(main)
   end
 
